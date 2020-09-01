@@ -1,0 +1,44 @@
+.videoCard > img {
+  height: 300px;
+  object-fit: contain;
+  width: 400px;
+}
+.videoCard {
+  color: white;
+  width: 400px;
+  height: 400px;
+  padding: 10px;
+  transition: transform 100ms;
+}
+
+.videoCard:hover {
+  transform: scale(1.05);
+}
+
+.videoCard > p {
+  font-size: 14px;
+}
+.videoCard > h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.videoCard {
+  padding-top: 10px;
+}
+.videoCard:hover > .videoCard__stats {
+  display: inline;
+}
+
+.videoCard > .videoCard__stats {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .videoCard,
+  .videoCard > img {
+    width: 300px;
+  }
+  #existing-iframe-example{
+    width: 100%;
+  }
+}
