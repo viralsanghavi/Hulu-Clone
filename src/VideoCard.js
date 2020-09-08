@@ -6,7 +6,6 @@ import { Modal } from '@material-ui/core';
 import { useEffect } from 'react';
 import axios from './axios';
 
-import PlayVideo from './PlayVideo';
 const VideoCard = forwardRef(({ movie, videoId }, ref) => {
     const base_url = "https://image.tmdb.org/t/p/original/"
     const [open, setOpen] = React.useState(false);
@@ -38,7 +37,7 @@ const VideoCard = forwardRef(({ movie, videoId }, ref) => {
         setOpen(false);
         setCurrentVideo(null)
     };
-    console.log(video)
+    // console.log(video)
 
     return (
         <div ref={ref} className="videoCard" >
@@ -69,6 +68,8 @@ const VideoCard = forwardRef(({ movie, videoId }, ref) => {
                     video !== null &&
                     <iframe id="existing-iframe-example"
                         width="640" height="360"
+                        key={videoId}
+                        title={movie.original_name || movie.title}
                         // src={`https://www.youtube.com/embed/${video.key}?autoplay=1&enablejsapi=1`}
                         src={`https://www.youtube.com/embed/${video}?autoplay=1&enablejsapi=1`}
                         frameBorder="0"

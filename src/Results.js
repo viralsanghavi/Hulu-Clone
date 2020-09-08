@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './Results.css'
-import VideoCard from './VideoCard'
 import axios from './axios'
-import FlipMove from 'react-flip-move'
+// import Paginate from './Paginate'
+import Pagination from './Paginate'
+import Posts from './Posts'
 
 
 const Results = ({ selectedOption }) => {
     const [movies, setMovies] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(8)
+
     useEffect(() => {
         async function fetchData() {
             const request = await axios.get(selectedOption)
@@ -15,15 +19,19 @@ const Results = ({ selectedOption }) => {
         }
         fetchData()
     }, [selectedOption])
+
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = movies.slice(indexOfFirstPost, indexOfLastPost)
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+    // console.log('current posts are :', currentPosts);
     return (
         <div className="results">
-            <FlipMove className="results">
-                {movies
-                    .map(movie =>
+            <Posts currentPosts={currentPosts} />
+            <Pagination postsPerPage={postsPerPage} totalPosts={movies.length} paginate={paginate} />
 
-                        <VideoCard key={movie.id} videoId={movie.id} movie={movie} />
-                    )}
-            </FlipMove>
 
         </div>
     )
